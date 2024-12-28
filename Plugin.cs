@@ -175,7 +175,6 @@ namespace Index
         {
             if (!initialized) return;
 
-            if (NetworkSystem.Instance.InRoom && NetworkSystem.Instance.GameModeString.Contains("MODDED"))
             {
                 indexPanel.transform.Find("IndexPanel").gameObject.GetComponent<MeshRenderer>().material.SetColor("_OuterPlatformColor", new Color(panelColorOuter.Value.x, panelColorOuter.Value.y, panelColorOuter.Value.z));
                 indexPanel.transform.Find("IndexPanel").gameObject.GetComponent<MeshRenderer>().material.SetColor("_MainPlatformColor", new Color(panelColorInner.Value.x, panelColorInner.Value.y, panelColorInner.Value.z));
@@ -189,7 +188,6 @@ namespace Index
         {
             if (!initialized) return;
 
-            if (NetworkSystem.Instance.InRoom && NetworkSystem.Instance.GameModeString.Contains("MODDED"))
             {
                 HandleModPanelVisibility();
                 foreach (ModHandler index in mods)
@@ -200,29 +198,12 @@ namespace Index
                     }
                 }
             }
-            else
-            {
-                if (inRoom)
-                {
-                    inRoom = false;
-                }
-                if (indexPanel.activeSelf)
-                {
-                    indexPanel.SetActive(false);
-                }
-                foreach (ModHandler index in mods)
-                {
-                    if (index.enabled)
-                    {
-                        index.OnModDisabled();
-                    }
-                }
-            }
+            
         }
 
         void HandleModPanelVisibility()
         {
-            if (!inRoom) inRoom = true;
+         
 
             if (ControllerInputPoller.instance.leftControllerPrimaryButton && ControllerInputPoller.instance.rightControllerPrimaryButton)
             {
